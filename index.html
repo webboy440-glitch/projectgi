@@ -342,7 +342,7 @@
 
   /* CONTACT */
   #contact { background: var(--teal-dark); }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 56px; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; margin-top: 56px; }
   .contact-info h3 { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: white; margin-bottom: 24px; }
   .contact-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
   .contact-icon { width: 40px; height: 40px; background: var(--teal); border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: white; font-size: 1rem; }
@@ -461,65 +461,146 @@
     .contact-form { padding: 32px 24px; }
     .hero-text { max-width: 580px; }
     .hero-text h1 { font-size: clamp(2rem, 3.5vw, 3.2rem); }
+    .pricing-cards { grid-template-columns: 1fr; gap: 20px; }
+    .advantage-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   /* ===================== MOBILE (≤ 768px) ===================== */
   @media (max-width: 768px) {
-    /* Nav */
+    /* --- Nav --- */
     .nav-links { display: none; }
     .hamburger { display: flex; }
+    nav { height: 72px; padding: 0 4%; }
+    .nav-logo img { height: 52px; }
+    .mobile-nav { top: 72px; }
 
-    /* Hero */
-    #home { padding: 120px 5% 60px; align-items: flex-end; min-height: 100svh; }
+    /* --- Hero --- */
+    #home {
+      padding: 100px 5% 56px;
+      align-items: center;
+      min-height: 100svh;
+    }
     .hero-text { max-width: 100%; }
-    .hero-text h1 { font-size: clamp(1.9rem, 7vw, 2.6rem); }
-    .hero-text p { font-size: 0.95rem; margin-bottom: 32px; }
-    .hero-btns { flex-direction: column; gap: 12px; }
-    .hero-btns a { text-align: center; }
+    .hero-text h1 {
+      font-size: clamp(2rem, 8vw, 2.8rem);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .hero-text p {
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+      max-width: 100%;
+    }
+    .hero-btns {
+      flex-direction: column;
+      gap: 12px;
+    }
+    .hero-btns a {
+      text-align: center;
+      width: 100%;
+      padding: 15px 20px;
+      font-size: 0.9rem;
+    }
 
-    /* Sections */
-    section:not(#home) { padding: 64px 5%; }
+    /* --- Shared sections --- */
+    section:not(#home) { padding: 56px 5%; }
     .section-title { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+    .section-body { font-size: 0.95rem; }
 
-    /* Services */
-    .services-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 36px; }
-    .service-card { padding: 28px 24px; }
+    /* --- Services --- */
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .service-card { padding: 28px 22px; }
+    .service-card h3 { font-size: 1.2rem; }
 
-    /* About */
-    .about-grid { grid-template-columns: 1fr; gap: 32px; }
-    .about-accent { padding: 36px 28px; }
-
-    /* Contact */
-    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-    .contact-form { padding: 32px 24px; }
-    .form-row { grid-template-columns: 1fr; }
-
-    /* Pricing — stack cards, fix fee block, fix CTA button */
-    .pricing-cards { grid-template-columns: 1fr; }
-    .advantage-grid { grid-template-columns: 1fr; gap: 20px; }
-    .pricing-card, .pricing-advantage { padding: 32px 24px; }
-    .no-fees-banner { padding: 24px 20px; }
-
-    /* Make fee block fill width and stack amount + label */
+    /* --- Pricing --- */
+    .pricing-cards { grid-template-columns: 1fr; gap: 16px; }
+    .pricing-card { padding: 28px 20px; overflow: visible; }
+    .pricing-card h3 { font-size: 1.2rem; word-break: break-word; }
     .pricing-fee {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       width: 100%;
-      gap: 2px;
-      padding: 12px 16px;
+      box-sizing: border-box;
+      gap: 4px;
+      padding: 12px 14px;
+      margin-bottom: 20px;
     }
-    .pricing-fee .fee-amount { font-size: 2rem; }
-    .pricing-fee .fee-label { font-size: 0.78rem; line-height: 1.4; white-space: normal; }
-
-    /* CTA button — prevent arrow wrapping */
+    .pricing-fee .fee-amount { font-size: 2rem; line-height: 1.1; }
+    .pricing-fee .fee-label {
+      font-size: 0.72rem;
+      line-height: 1.45;
+      white-space: normal;
+    }
+    .pricing-features li { font-size: 0.88rem; line-height: 1.6; }
+    .pricing-advantage { padding: 28px 20px; overflow: visible; }
+    .advantage-grid { grid-template-columns: 1fr; gap: 20px; }
+    .no-fees-banner {
+      flex-direction: column;
+      padding: 22px 18px;
+      gap: 12px;
+      margin: 32px 0;
+    }
+    .no-fees-banner .banner-text h4 { font-size: 1.05rem; }
+    .no-fees-banner .banner-text p { font-size: 0.88rem; }
+    .ar-footnote { padding: 20px 18px !important; }
+    .pricing-cta { padding: 32px 20px; }
+    .pricing-cta p { font-size: 1.15rem; }
     .pricing-cta a.btn-primary {
-      display: inline-flex;
-      align-items: center;
-      white-space: nowrap;
-      font-size: 0.82rem;
-      padding: 13px 20px;
+      display: block;
+      text-align: center;
+      font-size: 0.88rem;
+      padding: 14px 20px;
+      white-space: normal;
+      word-break: break-word;
     }
+
+    /* --- About --- */
+    .about-grid { grid-template-columns: 1fr; gap: 28px; }
+    .about-accent { padding: 32px 24px; }
+    .about-quote { font-size: 1.1rem; }
+
+    /* --- Contact / Form --- */
+    .contact-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+    .contact-form { padding: 28px 20px; }
+    .contact-form h3 { font-size: 1.3rem; }
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+    .form-group { margin-bottom: 16px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      font-size: 1rem; /* prevents iOS auto-zoom on focus */
+      padding: 13px 14px;
+    }
+    .form-submit {
+      padding: 15px;
+      font-size: 0.95rem;
+    }
+    .contact-item { gap: 12px; }
+    .contact-icon { width: 36px; height: 36px; font-size: 0.9rem; }
+
+    /* --- Footer --- */
+    footer { padding: 24px 5%; font-size: 0.78rem; line-height: 1.7; }
+  }
+
+  /* ===================== SMALL MOBILE (≤ 480px) ===================== */
+  @media (max-width: 480px) {
+    nav { height: 64px; }
+    .mobile-nav { top: 64px; }
+    .nav-logo img { height: 44px; }
+    #home { padding: 88px 5% 48px; }
+    .hero-text h1 { font-size: clamp(1.75rem, 8.5vw, 2.4rem); }
+    .btn-primary, .btn-outline { padding: 13px 20px; font-size: 0.85rem; }
+    section:not(#home) { padding: 48px 4%; }
+    .pricing-card { padding: 24px 16px; }
+    .pricing-advantage { padding: 24px 16px; }
+    .contact-form { padding: 22px 16px; }
+    .service-card { padding: 22px 18px; }
+    .about-accent { padding: 28px 20px; }
   }
 
   /* ===================== PRICING ===================== */
@@ -729,104 +810,7 @@
     font-style: italic;
   }
 
-  /* ===================== SMALL MOBILE (≤ 480px) ===================== */
-  @media (max-width: 480px) {
-    nav { height: 84px; }
-    .mobile-nav { top: 84px; }
-    .nav-logo img { height: 60px; }
-    .hero-text h1 { font-size: 1.8rem; }
-    .btn-primary, .btn-outline { padding: 13px 24px; font-size: 0.85rem; }
-    .contact-form { padding: 24px 16px; }
-    .service-card { padding: 24px 20px; }
-  }
-
-  /* ===================== MOBILE PRICING OVERRIDE
-     Must come AFTER the pricing block to win the cascade
-  ====================================================== */
-  @media (max-width: 768px) {
-
-    /* Stack cards single column */
-    .pricing-cards {
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-
-    /* Card padding + kill overflow so text is never clipped */
-    .pricing-card {
-      padding: 28px 24px;
-      overflow: visible;
-    }
-
-    /* Title fits full width */
-    .pricing-card h3 {
-      font-size: 1.25rem;
-      word-break: break-word;
-    }
-
-    /* Fee block: full width, stacked, never clips */
-    .pricing-fee {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      width: 100%;
-      box-sizing: border-box;
-      gap: 4px;
-      padding: 14px 16px;
-      margin-bottom: 24px;
-    }
-    .pricing-fee .fee-amount {
-      font-size: 2.2rem;
-      line-height: 1.1;
-    }
-    .pricing-fee .fee-label {
-      font-size: 0.75rem;
-      line-height: 1.45;
-      white-space: normal;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    /* Feature list items never clip */
-    .pricing-features li {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      word-break: break-word;
-    }
-
-    /* Advantage block */
-    .pricing-advantage {
-      padding: 28px 24px;
-      overflow: visible;
-    }
-    .advantage-grid {
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-
-    /* No-fees banner */
-    .no-fees-banner {
-      flex-direction: column;
-      padding: 24px 20px;
-      gap: 12px;
-    }
-
-    /* CTA block: center, button never wraps */
-    .pricing-cta {
-      padding: 36px 24px;
-    }
-    .pricing-cta p {
-      font-size: 1.2rem;
-    }
-    .pricing-cta a.btn-primary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      white-space: nowrap;
-      font-size: 0.85rem;
-      padding: 14px 22px;
-      letter-spacing: 0.03em;
-    }
-  }
+  /* end styles */
 </style>
 </head>
 <body>
@@ -1088,7 +1072,7 @@
       <p class="section-body">Ready to streamline your practice? Reach out and we'll get back to you within 1–2 business days.</p>
     </div>
 
-    <div class="contact-grid" style="margin-top:56px; display:grid; grid-template-columns:1fr 1.4fr; gap:64px; align-items:start;">
+    <div class="contact-grid">
 
       <!-- Contact Info -->
       <div style="display:flex; flex-direction:column; gap:24px;">
