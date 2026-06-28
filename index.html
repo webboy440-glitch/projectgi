@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuietStream Mental Health Ops LLC</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #177a6e;
+    --teal-light: #3db8cc;
+    --teal-dark: #0b3d36;
+    --gold: #f0a030;
+    --off-white: #f8fffe;
+    --warm-gray: #f0f7f6;
+    --text: #0b2e2a;
+    --text-muted: #3a6b64;
+    --border: #c0deda;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    background: var(--off-white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(11,45,40,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(23,122,110,0.25);
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .nav-logo img { height: 80px; width: auto; }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: rgba(255,255,255,0.75);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 2px;
+    background: var(--teal-light);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--teal-light); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    background: var(--teal);
+    color: white !important;
+    padding: 10px 24px;
+    border-radius: 2px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--teal-dark) !important; color: white !important; }
+  .nav-cta::after { display: none !important; }
+
+  /* ===================== HERO ===================== */
+  #home {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 120px 5% 80px;
+  }
+
+  /* Deep dark background */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #061e1a 0%, #0b3d36 40%, #082e28 70%, #041a16 100%);
+    z-index: 0;
+  }
+
+  /* Ambient glow orbs */
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    top: -10%; right: -5%;
+    width: 55vw; height: 55vw;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(23,122,110,0.4) 0%, rgba(61,184,204,0.15) 40%, transparent 70%);
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    bottom: -15%; left: 30%;
+    width: 45vw; height: 45vw;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(240,160,48,0.1) 0%, transparent 60%);
+  }
+
+  /* Stream / river flowing lines */
+  .stream-lines {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .stream-lines svg {
+    position: absolute;
+    width: 100%; height: 100%;
+  }
+
+  /* Subtle noise texture overlay */
+  .hero-noise {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px;
+  }
+
+  /* Gold line accent */
+  .hero-gold-line {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    z-index: 4;
+    opacity: 0.6;
+  }
+
+  /* Hero content */
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 5;
+  }
+  .hero-text {
+    max-width: 620px;
+  }
+  .hero-text h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 4.2vw, 4rem);
+    line-height: 1.1;
+    color: #ffffff;
+    margin-bottom: 28px;
+  }
+  .hero-text h1 em {
+    font-style: italic;
+    color: var(--teal-light);
+  }
+  .hero-text p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 44px;
+    max-width: 460px;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--teal);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--teal-light); transform: translateY(-1px); }
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.35);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--teal-light); color: var(--teal-light); }
+
+  /* Launch tag */
+  .launch-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(240,160,48,0.15);
+    border: 1px solid rgba(240,160,48,0.45);
+    color: #e8c97a;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+  }
+  .launch-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  /* ===================== SHARED ===================== */
+  section:not(#home) { padding: 100px 5%; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    color: var(--teal-dark);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .section-body {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    max-width: 680px;
+  }
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+    margin: 24px 0;
+  }
+
+  /* MISSION */
+  #mission { background: var(--teal-dark); color: white; }
+  #mission .section-label { color: var(--teal-light); }
+  #mission .section-title { color: white; }
+  #mission .section-body { color: rgba(255,255,255,0.75); max-width: 780px; font-size: 1.1rem; line-height: 1.85; }
+  #mission .divider { background: linear-gradient(90deg, var(--teal-light), var(--gold)); }
+
+  #services .section-label { color: var(--teal-light); }
+  #services .section-title { color: white; }
+  #services .section-body { color: rgba(255,255,255,0.7); }
+
+  /* SERVICES */
+  #services { background: var(--teal-dark); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 56px;
+  }
+  .service-card {
+    background: rgba(255,255,255,0.06);
+    padding: 40px 32px;
+    border-radius: 3px;
+    border-top: 3px solid var(--teal-light);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(11,61,54,0.2); }
+  .service-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--border);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .service-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: white;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+  .service-card p { font-size: 0.92rem; line-height: 1.75; color: rgba(255,255,255,0.65); }
+
+  /* ABOUT */
+  #about { background: var(--off-white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 16px; }
+  .about-accent {
+    background: linear-gradient(135deg, #e6f5f3 0%, #f2faf8 100%);
+    border-radius: 4px;
+    padding: 56px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-accent::before {
+    content: '"';
+    font-family: 'DM Serif Display', serif;
+    font-size: 12rem;
+    color: rgba(11,61,54,0.07);
+    position: absolute;
+    top: -20px; left: 20px;
+    line-height: 1;
+  }
+  .about-quote {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    line-height: 1.65;
+    color: var(--teal-dark);
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+  }
+  .about-quote cite {
+    display: block;
+    margin-top: 20px;
+    font-style: normal;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--teal);
+    text-transform: uppercase;
+  }
+
+  /* CONTACT */
+  #contact { background: var(--teal-dark); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 56px; }
+  .contact-info h3 { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: white; margin-bottom: 24px; }
+  .contact-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+  .contact-icon { width: 40px; height: 40px; background: var(--teal); border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: white; font-size: 1rem; }
+  .contact-item-text p:first-child { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-light); margin-bottom: 4px; }
+  .contact-item-text p:last-child { font-size: 0.95rem; color: rgba(255,255,255,0.75); }
+  .contact-form { background: rgba(255,255,255,0.06); padding: 48px 40px; border-radius: 3px; box-shadow: 0 4px 24px rgba(0,0,0,0.2); }
+  .contact-form h3 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: white; margin-bottom: 8px; }
+  .contact-form > p { font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 28px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 20px; }
+  .form-group label { display: block; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 8px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 12px 16px; border: 1.5px solid rgba(23,122,110,0.25); border-radius: 2px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.92rem; color: white;
+    background: rgba(255,255,255,0.08); transition: border-color 0.2s; outline: none;
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+  .form-group select option { background: var(--teal-dark); color: white; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--teal-light); background: rgba(255,255,255,0.12); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-submit {
+    width: 100%; background: var(--teal); color: white; padding: 14px; border: none; border-radius: 2px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.05em; cursor: pointer; transition: background 0.2s;
+  }
+  .form-submit:hover { background: var(--teal-dark); }
+
+  footer {
+    background: var(--text); color: rgba(255,255,255,0.5);
+    text-align: center; padding: 32px 5%;
+    font-size: 0.82rem; letter-spacing: 0.05em;
+  }
+  footer span { color: var(--teal-light); }
+
+  .fade-in { opacity: 1; transform: none; transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.hidden { opacity: 0; transform: translateY(24px); }
+  .fade-in.hidden.visible { opacity: 1; transform: none; }
+
+  /* ===================== HAMBURGER MENU ===================== */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 200;
+    background: none;
+    border: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .hamburger span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Mobile nav overlay */
+  .mobile-nav {
+    position: fixed;
+    top: 100px; left: 0; right: 0;
+    background: rgba(11,45,40,0.98);
+    backdrop-filter: blur(16px);
+    padding: 32px 5%;
+    z-index: 99;
+    border-bottom: 1px solid rgba(23,122,110,0.25);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+  }
+  .mobile-nav.open {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .mobile-nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .mobile-nav ul li a {
+    display: block;
+    padding: 14px 0;
+    text-decoration: none;
+    color: rgba(255,255,255,0.8);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: color 0.2s;
+  }
+  .mobile-nav ul li:last-child a {
+    color: var(--teal-light);
+    border-bottom: none;
+    margin-top: 8px;
+    font-size: 1rem;
+  }
+  .mobile-nav ul li a:hover { color: var(--teal-light); }
+
+  /* ===================== TABLET (768px – 1024px) ===================== */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .about-grid { gap: 48px; }
+    .contact-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+    .contact-form { padding: 32px 24px; }
+    .hero-text { max-width: 580px; }
+    .hero-text h1 { font-size: clamp(2rem, 3.5vw, 3.2rem); }
+  }
+
+  /* ===================== MOBILE (≤ 768px) ===================== */
+  @media (max-width: 768px) {
+    /* Nav */
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+
+    /* Hero */
+    #home { padding: 120px 5% 60px; align-items: flex-end; min-height: 100svh; }
+    .hero-text { max-width: 100%; }
+    .hero-text h1 { font-size: clamp(1.9rem, 7vw, 2.6rem); }
+    .hero-text p { font-size: 0.95rem; margin-bottom: 32px; }
+    .hero-btns { flex-direction: column; gap: 12px; }
+    .hero-btns a { text-align: center; }
+
+    /* Sections */
+    section:not(#home) { padding: 64px 5%; }
+    .section-title { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+
+    /* Services */
+    .services-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 36px; }
+    .service-card { padding: 28px 24px; }
+
+    /* About */
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    .about-accent { padding: 36px 28px; }
+
+    /* Contact */
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .contact-form { padding: 32px 24px; }
+    .form-row { grid-template-columns: 1fr; }
+
+    /* Pricing — stack cards, fix fee block, fix CTA button */
+    .pricing-cards { grid-template-columns: 1fr; }
+    .advantage-grid { grid-template-columns: 1fr; gap: 20px; }
+    .pricing-card, .pricing-advantage { padding: 32px 24px; }
+    .no-fees-banner { padding: 24px 20px; }
+
+    /* Make fee block fill width and stack amount + label */
+    .pricing-fee {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      gap: 2px;
+      padding: 12px 16px;
+    }
+    .pricing-fee .fee-amount { font-size: 2rem; }
+    .pricing-fee .fee-label { font-size: 0.78rem; line-height: 1.4; white-space: normal; }
+
+    /* CTA button — prevent arrow wrapping */
+    .pricing-cta a.btn-primary {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      font-size: 0.82rem;
+      padding: 13px 20px;
+    }
+  }
+
+  /* ===================== PRICING ===================== */
+  #pricing { background: var(--warm-gray); }
+  #pricing .section-label { color: var(--teal); }
+  #pricing .section-title { color: var(--teal-dark); }
+
+  .pricing-intro {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    max-width: 680px;
+    margin-bottom: 16px;
+  }
+
+  .no-fees-banner {
+    background: linear-gradient(135deg, var(--teal-dark) 0%, #0b3d36 100%);
+    border-radius: 4px;
+    padding: 28px 40px;
+    margin: 48px 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .no-fees-banner .banner-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+  .no-fees-banner .banner-text h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    color: white;
+    margin-bottom: 6px;
+  }
+  .no-fees-banner .banner-text p {
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.6;
+    max-width: 700px;
+  }
+
+  .pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    margin-bottom: 40px;
+  }
+  .pricing-card {
+    background: white;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    padding: 44px 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 10px 36px rgba(0,0,0,0.09); }
+  .pricing-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+  }
+  .pricing-card-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--border);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .pricing-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--teal-dark);
+    margin-bottom: 20px;
+    line-height: 1.25;
+  }
+  .pricing-fee {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    background: rgba(23,122,110,0.07);
+    border: 1px solid rgba(23,122,110,0.2);
+    border-radius: 3px;
+    padding: 10px 18px;
+    margin-bottom: 28px;
+  }
+  .pricing-fee .fee-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.9rem;
+    color: var(--teal);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .pricing-fee .fee-label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .pricing-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .pricing-features li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+  .pricing-features li::before {
+    content: '';
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, var(--teal), var(--gold));
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+  }
+  .pricing-features li::before {
+    content: '✓';
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, var(--teal), var(--gold));
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-size: 0.65rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+
+  .pricing-advantage {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 44px 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+  }
+  .pricing-advantage::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--teal));
+  }
+  .pricing-advantage h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--teal-dark);
+    margin-bottom: 28px;
+  }
+  .advantage-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .advantage-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .advantage-item .adv-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .advantage-item h4 {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--teal-dark);
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .advantage-item p {
+    font-size: 0.87rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  .pricing-cta {
+    text-align: center;
+    margin-top: 48px;
+    padding: 44px 40px;
+    background: linear-gradient(135deg, var(--teal-dark), #0b3d36);
+    border-radius: 4px;
+  }
+  .pricing-cta p {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+
+  /* ===================== SMALL MOBILE (≤ 480px) ===================== */
+  @media (max-width: 480px) {
+    nav { height: 84px; }
+    .mobile-nav { top: 84px; }
+    .nav-logo img { height: 60px; }
+    .hero-text h1 { font-size: 1.8rem; }
+    .btn-primary, .btn-outline { padding: 13px 24px; font-size: 0.85rem; }
+    .contact-form { padding: 24px 16px; }
+    .service-card { padding: 24px 20px; }
+  }
+
+  /* ===================== MOBILE PRICING OVERRIDE
+     Must come AFTER the pricing block to win the cascade
+  ====================================================== */
+  @media (max-width: 768px) {
+
+    /* Stack cards single column */
+    .pricing-cards {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    /* Card padding + kill overflow so text is never clipped */
+    .pricing-card {
+      padding: 28px 24px;
+      overflow: visible;
+    }
+
+    /* Title fits full width */
+    .pricing-card h3 {
+      font-size: 1.25rem;
+      word-break: break-word;
+    }
+
+    /* Fee block: full width, stacked, never clips */
+    .pricing-fee {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      box-sizing: border-box;
+      gap: 4px;
+      padding: 14px 16px;
+      margin-bottom: 24px;
+    }
+    .pricing-fee .fee-amount {
+      font-size: 2.2rem;
+      line-height: 1.1;
+    }
+    .pricing-fee .fee-label {
+      font-size: 0.75rem;
+      line-height: 1.45;
+      white-space: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Feature list items never clip */
+    .pricing-features li {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      word-break: break-word;
+    }
+
+    /* Advantage block */
+    .pricing-advantage {
+      padding: 28px 24px;
+      overflow: visible;
+    }
+    .advantage-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    /* No-fees banner */
+    .no-fees-banner {
+      flex-direction: column;
+      padding: 24px 20px;
+      gap: 12px;
+    }
+
+    /* CTA block: center, button never wraps */
+    .pricing-cta {
+      padding: 36px 24px;
+    }
+    .pricing-cta p {
+      font-size: 1.2rem;
+    }
+    .pricing-cta a.btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      font-size: 0.85rem;
+      padding: 14px 22px;
+      letter-spacing: 0.03em;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <img src="data:image/png;base64,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EQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQVF0Ovq46V+2fnJ1bqqLodfVx0r9s/OTq3UBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERBUXQ6+rjpX7Z+cnVuqouh19XHSv2z85OrdQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREFRdDr6uOlftn5ydW6qi6HX1cdK/bPzk6t1AREQEREBERAREQEREBERAREQEREBERAREQEREBFwiDlF8lzRzIXgrL5ZaJxbWXegp3DmJahjT+JWYrM+GJtEeZZFFHpNbaSYcHUFAf4ZM/wAl2Q6x0rMcM1Bbv8U7W/zW/wBHJ/1n9Gn1sc/8o/VnUXmpK+hq271JW09QO+KUO/kV6AQe1RzGvLeJifDlFwuUZEREBERAREQEREBERAREQEREBERAREQEREBERAREQVF0Ovq46V+2fnJ1bqqLodfVx0r9s/OTq3UBERAREQEREBERAREQEREBERAREQEREBERAXBICx1/vNBZKF1XXziNnJrRxc89zR2lU7q7W94vjnU9M91DQ8urjd6Tx+87+g4e1T4ePbL48KvI5dMEd+8/CyNUa9sFjLoXVDquqacGCn9Ig9xPIezOfBVzfNqmo6wuZbIKe3Rnk7HWyfe7h+CiLafhy/BdrKfwXVx8bBj8xufvcfLy+RlntOo+557jdL5dC79I3WtqWuOSx8ziz3N5D7l5G0fgszHS94C7RS+Cnnk1p2jsgjjTfvbuwooxhfQos8cLNil8F9Cm8FDbmJ6cP7mFZTGN4e0lrhyIOCFn7Vq7VFqI8nuk0rAc9XUHrWnw9LiB7CF0mm4Hgut0A7lDfk1t2t3WsfGvXvVY+mtqNPUObBfaTyR54dfDl0fvHMfirDpKmnq6dlRTTRzRPGWvY4EH3ha6eT5HJZXTd9uenqnrKKXMTjmWB59B/wDofEf/AMVHLTHM7p2dDFOSO1l+IsTpq+0V9oBVUjiHDhJE4+lG7uP9D2rLKssCIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgqLodfVx0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HX1cdK/bPzk6t1AREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQVF0Ovq46V+2fnJ1bqqLodfVx0r9s/OTq3UBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERBUXQ6+rjpX7Z+cnVuqouh19XHSv2z85OrdQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREFRdDr6uOlftn5ydW6qi6HX1cdK/bPzk6t1AREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQVF0Ovq46V+2fnJ1bqqLodfVx0r9s/OTq3UBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERBUXQ6+rjpX7Z+cnVuqouh19XHSv2z85OrdQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREFRdDr6uOlftn5ydW6qi6HX1cdK/bPzk6t1AREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQVF0Ovq46V+2fnJ1bqIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiIP/2Q==" alt="QuietStream Mental Health Ops LLC">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="mailto:gayleyn@quietstreammh.com?subject=Revenue%20Audit%20Request&body=Hi%20Gayley%2C%20I%27d%20like%20to%20learn%20more%20about%20QuietStream%27s%20services." class="nav-cta">Get Started</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="#home" onclick="closeMobileNav()">Home</a></li>
+    <li><a href="#mission" onclick="closeMobileNav()">Mission</a></li>
+    <li><a href="#services" onclick="closeMobileNav()">Services</a></li>
+    <li><a href="#pricing" onclick="closeMobileNav()">Pricing</a></li>
+    <li><a href="#about" onclick="closeMobileNav()">About</a></li>
+    <li><a href="mailto:gayleyn@quietstreammh.com?subject=Revenue%20Audit%20Request&body=Hi%20Gayley%2C%20I%27d%20like%20to%20learn%20more%20about%20QuietStream%27s%20services." onclick="closeMobileNav()">Get Started →</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <!-- Dark atmospheric background -->
+  <div class="hero-bg"></div>
+
+  <!-- Flowing stream SVG lines -->
+  <div class="stream-lines">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="streamGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#3db8cc" stop-opacity="0"/>
+          <stop offset="50%" stop-color="#3db8cc" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#3db8cc" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="streamGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#f0a030" stop-opacity="0"/>
+          <stop offset="60%" stop-color="#f0a030" stop-opacity="0.22"/>
+          <stop offset="100%" stop-color="#f0a030" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="streamGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#177a6e" stop-opacity="0"/>
+          <stop offset="40%" stop-color="#177a6e" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#177a6e" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <!-- Flowing curves suggesting a stream/river -->
+      <path d="M-100,600 Q200,450 500,520 T900,480 T1300,440 T1600,400" fill="none" stroke="url(#streamGrad1)" stroke-width="1.5" opacity="0.8"/>
+      <path d="M-100,620 Q250,470 550,540 T950,500 T1350,460 T1600,420" fill="none" stroke="url(#streamGrad1)" stroke-width="0.8" opacity="0.5"/>
+      <path d="M-100,300 Q300,200 600,280 T1000,240 T1400,200 T1600,160" fill="none" stroke="url(#streamGrad3)" stroke-width="1" opacity="0.6"/>
+      <path d="M-100,340 Q280,240 580,310 T980,270 T1380,230 T1600,190" fill="none" stroke="url(#streamGrad3)" stroke-width="0.5" opacity="0.4"/>
+      <!-- Gold accent line -->
+      <path d="M-100,700 Q400,620 700,660 T1200,620 T1600,580" fill="none" stroke="url(#streamGrad2)" stroke-width="1.2" opacity="0.7"/>
+      <!-- Subtle vertical light rays -->
+      <line x1="720" y1="0" x2="660" y2="900" stroke="rgba(61,184,204,0.05)" stroke-width="60"/>
+      <line x1="400" y1="0" x2="360" y2="900" stroke="rgba(240,160,48,0.04)" stroke-width="40"/>
+    </svg>
+  </div>
+  <!-- Noise overlay -->
+  <div class="hero-noise"></div>
+  <!-- Gold left accent line -->
+  <div class="hero-gold-line"></div>
+
+  <!-- Text Content -->
+  <div class="hero-inner">
+    <div class="hero-text fade-in">
+<h1>We manage<br><em>the current,</em><br>so you can<br>focus on care.</h1>
+      <p>Administrative silence and financial precision for Massachusetts group practices. Boutique, high-touch operations management — from billing to credentialing.</p>
+      <div class="hero-btns">
+        <a href="mailto:gayleyn@quietstreammh.com?subject=Revenue%20Audit%20Request&body=Hi%20Gayley%2C%20I%27d%20like%20to%20learn%20more%20about%20QuietStream%27s%20services." class="btn-primary">Request Revenue Audit</a>
+        <a href="#services" class="btn-outline">Our Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section id="mission">
+  <div class="section-inner fade-in">
+    <p class="section-label">Our Mission</p>
+    <div class="divider"></div>
+    <h2 class="section-title">Built for the Complexity<br>of Massachusetts Healthcare</h2>
+    <p class="section-body">QuietStream Mental Health Ops LLC provides the administrative silence and financial precision that Massachusetts group practices need to thrive. We manage the current, so you can focus on the care.</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="fade-in">
+      <p class="section-label">What We Do</p>
+      <h2 class="section-title">Three Service Pillars</h2>
+      <div class="divider"></div>
+      <p class="section-body">Precision operations management designed for 2–10 clinician group practices navigating Massachusetts-specific payer nuances.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <span class="service-num">01</span>
+        <h3>Revenue Cycle Architecture</h3>
+        <p>Full-cycle insurance billing for BCBS MA, MassHealth, and Tufts. Clean claim submission and aggressive denial management to eliminate revenue leakage before it compounds.</p>
+      </div>
+      <div class="service-card fade-in">
+        <span class="service-num">02</span>
+        <h3>EHR Optimization & Management</h3>
+        <p>Expert-level configuration of TherapyNotes and SimplePractice to automate co-pay collection and pre-session eligibility verification — so nothing falls through the cracks.</p>
+      </div>
+      <div class="service-card fade-in">
+        <span class="service-num">03</span>
+        <h3>Provider Credentialing & Compliance</h3>
+        <p>Comprehensive CAQH maintenance and payer enrollment for new and existing clinicians, built to 2026-compliant HIPAA standards for groups of 2–10 providers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="fade-in">
+      <p class="section-label">Transparent Pricing</p>
+      <h2 class="section-title">Simple, Performance-Based<br>Pricing</h2>
+      <div class="divider"></div>
+      <p class="pricing-intro">At QuietStream, we believe in win-win partnerships. We don't charge set-up fees, hidden administrative costs, or software markups. Our pricing is transparent and designed specifically for Massachusetts group practices.</p>
+    </div>
+
+    <!-- No Hidden Fees Banner -->
+    <div class="no-fees-banner fade-in">
+      <div class="banner-icon">🚫</div>
+      <div class="banner-text">
+        <h4>No Start-up or Onboarding Fees for Standard EHR Integration</h4>
+        <p>We invest in your practice from day one. No hidden costs, no billing software markups, no surprises. Just clean, transparent pricing that grows with you.</p>
+      </div>
+    </div>
+
+    <!-- Two Pricing Cards -->
+    <div class="pricing-cards">
+
+      <div class="pricing-card fade-in">
+        <span class="pricing-card-num">01</span>
+        <h3>Full Revenue Cycle Management</h3>
+        <div class="pricing-fee">
+          <span class="fee-amount">7%</span>
+          <span class="fee-label">of Net Monthly Collections</span>
+        </div>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:8px;font-style:italic;">(Subject to a $500 monthly minimum)</p>
+        <ul class="pricing-features">
+          <li><strong>Complete Claim Submission</strong> — Daily processing via our integrated Office Ally clearinghouse.</li>
+          <li><strong>Zero Billing Software Costs</strong> — We provide the billing infrastructure and transmission fees at no additional cost.</li>
+          <li><strong>Aggressive Denial Management</strong> — Specialized expertise resolving complex MassHealth TPL (Third Party Liability) rejections.</li>
+          <li><strong>Payment Posting & Reconciliation</strong> — Every insurance payment accurately reflected in your clinical records.</li>
+          <li><strong>Monthly Financial Health Reports</strong> — Detailed insights into your practice's growth and aging accounts.</li>
+        </ul>
+      </div>
+
+      <div class="pricing-card fade-in">
+        <span class="pricing-card-num">02</span>
+        <h3>Insurance Credentialing & Enrollment</h3>
+        <div class="pricing-fee">
+          <span class="fee-amount">$350</span>
+          <span class="fee-label">per Provider / per Insurance Panel</span>
+        </div>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:8px;font-style:italic;">(Discounted bundling options available when paired with an annual RCM contract)</p>
+        <ul class="pricing-features">
+          <li>Full application management for major MA payers — BCBS, Tufts, Harvard Pilgrim, and MassHealth.</li>
+          <li>CAQH profile setup and quarterly maintenance/attestations.</li>
+          <li>NPI Registry updates and Medicare/Medicaid re-validations.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Historical AR Policy Footnote -->
+    <div class="ar-footnote fade-in" style="margin-top:40px;border:1.5px solid var(--border);border-left:5px solid var(--gold);background:linear-gradient(135deg,#fffdf5 0%,#f8fffe 100%);border-radius:4px;padding:28px 32px;">
+      <p style="font-size:0.8rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">📋 A Note on Historical Accounts Receivable (AR)</p>
+      <p style="font-size:0.92rem;line-height:1.8;color:var(--text-muted);">*Standard setup and EHR integration for your go-forward claims are completely free. For practices requiring a deep-dive audit, correction, and recovery of legacy denied claims (dates of service prior to onboarding), we offer specialized AR Clean-up services on a project or contingency basis. We will audit your AR ledger during onboarding and provide a clear, custom recovery scope.</p>
+    </div>
+
+    <!-- Advantage Block -->
+    <div class="pricing-advantage fade-in">
+      <h3>The QuietStream Advantage</h3>
+      <div class="advantage-grid">
+        <div class="advantage-item">
+          <span class="adv-icon">🔓</span>
+          <div>
+            <h4>No Onboarding Fees</h4>
+            <p>We invest in your standard EHR integration from day one with zero start-up costs.*</p>
+          </div>
+        </div>
+        <div class="advantage-item">
+          <span class="adv-icon">💻</span>
+          <div>
+            <h4>Keep Your EHR</h4>
+            <p>We work directly within TherapyNotes, SimplePractice, and more — zero data migration headaches.</p>
+          </div>
+        </div>
+        <div class="advantage-item">
+          <span class="adv-icon">📍</span>
+          <div>
+            <h4>Local MA Expertise</h4>
+            <p>We understand 2026 SENDPro mandates and Massachusetts-specific payer quirks that national firms miss.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="pricing-cta fade-in">
+      <p>Ready to recover your missing revenue?</p>
+      <a href="mailto:gayleyn@quietstreammh.com?subject=Revenue%20Audit%20Request&body=Hi%20Gayley%2C%20I%27d%20like%20to%20learn%20more%20about%20QuietStream%27s%20services." class="btn-primary" style="background:var(--gold);color:var(--teal-dark);font-weight:600;">Request a Free Revenue Audit →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="fade-in">
+        <p class="section-label">About QuietStream</p>
+        <h2 class="section-title">Focus on the Care.<br>We'll Handle the Current.</h2>
+        <div class="divider"></div>
+        <p class="section-body">Founded by Gayley Nfonsam, QuietStream Mental Health Ops was built to solve the "clogged pipes" of modern mental health billing. With a focus on 2026-compliant HIPAA standards and Massachusetts-specific payer nuances, we provide boutique, high-touch operations management.</p>
+        <br>
+        <p class="section-body">We architect sustainable growth for local group practices — because your energy belongs with your clients, not your clearinghouse.</p>
+        <br>
+        <a href="mailto:gayleyn@quietstreammh.com?subject=Revenue%20Audit%20Request&body=Hi%20Gayley%2C%20I%27d%20like%20to%20learn%20more%20about%20QuietStream%27s%20services." class="btn-primary">Work With Us</a>
+      </div>
+      <div class="about-accent fade-in">
+        <p class="about-quote">
+          "Focus on the care. We'll handle the current."
+          <cite>— Gayley Nfonsam, Founder</cite>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="fade-in">
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">Get in Touch</h2>
+      <div class="divider"></div>
+      <p class="section-body">Ready to streamline your practice? Reach out and we'll get back to you within 1–2 business days.</p>
+    </div>
+
+    <div class="contact-grid" style="margin-top:56px; display:grid; grid-template-columns:1fr 1.4fr; gap:64px; align-items:start;">
+
+      <!-- Contact Info -->
+      <div style="display:flex; flex-direction:column; gap:24px;">
+        <div class="contact-item fade-in">
+          <div class="contact-icon">✉</div>
+          <div class="contact-item-text">
+            <p>Email</p>
+            <p><a href="mailto:gayleyn@quietstreammh.com" style="color:var(--teal-light);text-decoration:none;font-size:1rem;">gayleyn@quietstreammh.com</a></p>
+          </div>
+        </div>
+
+        <div class="contact-item fade-in">
+          <div class="contact-icon">📞</div>
+          <div class="contact-item-text">
+            <p>Phone</p>
+            <p><a href="tel:+16172370684" style="color:var(--teal-light);text-decoration:none;font-size:1rem;">(617) 237-0684</a></p>
+          </div>
+        </div>
+
+        <div class="contact-item fade-in">
+          <div class="contact-icon">📍</div>
+          <div class="contact-item-text">
+            <p>Service Area</p>
+            <p>Serving Group Practices across Massachusetts</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Intake Form -->
+      <div class="contact-form fade-in">
+        <h3>Start a Conversation</h3>
+        <p>Tell us a bit about your practice so we can make the most of our first call.</p>
+
+        <form action="mailto:gayleyn@quietstreammh.com" method="post" enctype="text/plain" onsubmit="return handleFormSubmit(event)">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="f-name">First Name *</label>
+              <input type="text" id="f-name" name="first_name" placeholder="First" required>
+            </div>
+            <div class="form-group">
+              <label for="f-lname">Last Name *</label>
+              <input type="text" id="f-lname" name="last_name" placeholder="Last" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="f-email">Email Address *</label>
+            <input type="email" id="f-email" name="email" placeholder="you@yourpractice.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="f-phone">Phone Number</label>
+            <input type="tel" id="f-phone" name="phone" placeholder="(617) 000-0000">
+          </div>
+
+          <!-- Strategic Filter Dropdowns -->
+          <div class="form-group">
+            <label for="f-practice-type">Practice Type *</label>
+            <select id="f-practice-type" name="practice_type" required>
+              <option value="" disabled selected>Select your practice size…</option>
+              <option value="solo">Solo Practice</option>
+              <option value="group-small">Group Practice (2–5 Clinicians)</option>
+              <option value="group-large">Large Group Practice (6–10+ Clinicians)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="f-billing-volume">Estimated Monthly Billing Volume *</label>
+            <select id="f-billing-volume" name="monthly_billing_volume" required>
+              <option value="" disabled selected>Select your billing range…</option>
+              <option value="under-10k">Under $10,000 / month</option>
+              <option value="10k-30k">$10,000 – $30,000 / month</option>
+              <option value="30k-70k">$30,000 – $70,000 / month</option>
+              <option value="over-70k">Over $70,000 / month</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="f-ehr">Primary EHR Platform *</label>
+            <select id="f-ehr" name="ehr_platform" required>
+              <option value="" disabled selected>Select your EHR…</option>
+              <option value="simplepractice">SimplePractice</option>
+              <option value="therapynotes">TherapyNotes</option>
+              <option value="alma-headway">Alma / Headway</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="f-message">Anything else you'd like us to know?</label>
+            <textarea id="f-message" name="message" placeholder="Tell us about your biggest billing challenge, a specific payer issue, or what prompted you to reach out…"></textarea>
+          </div>
+
+          <button type="submit" class="form-submit" style="width:100%;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;">Request a Discovery Call →</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <span>QuietStream Mental Health Ops LLC</span> · Massachusetts · HIPAA Compliant · <a href="mailto:gayleyn@quietstreammh.com" style="color:rgba(255,255,255,0.4);text-decoration:none;">gayleyn@quietstreammh.com</a></p>
+</footer>
+
+<script>
+  // Intake form submission — builds a mailto with all fields
+  window.handleFormSubmit = function(e) {
+    e.preventDefault();
+    const f = e.target;
+    const get = id => document.getElementById(id)?.value || '';
+    const subject = encodeURIComponent('Discovery Call Request — QuietStream Intake Form');
+    const body = encodeURIComponent(
+      'Name: ' + get('f-name') + ' ' + get('f-lname') + '\n' +
+      'Email: ' + get('f-email') + '\n' +
+      'Phone: ' + get('f-phone') + '\n\n' +
+      '--- Practice Details ---\n' +
+      'Practice Type: ' + (f.practice_type.options[f.practice_type.selectedIndex]?.text || '') + '\n' +
+      'Monthly Billing Volume: ' + (f.monthly_billing_volume.options[f.monthly_billing_volume.selectedIndex]?.text || '') + '\n' +
+      'Primary EHR: ' + (f.ehr_platform.options[f.ehr_platform.selectedIndex]?.text || '') + '\n\n' +
+      'Message:\n' + get('f-message')
+    );
+    window.location.href = 'mailto:gayleyn@quietstreammh.com?subject=' + subject + '&body=' + body;
+    return false;
+  };
+
+
+  document.querySelectorAll('.fade-in').forEach(el => {
+    el.classList.add('hidden');
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  var hamburger = document.getElementById('hamburger');
+  var mobileNav = document.getElementById('mobileNav');
+
+  // Must be on window so inline onclick="closeMobileNav()" works on all mobile browsers
+  window.closeMobileNav = function() {
+    hamburger.classList.remove('open');
+    mobileNav.classList.remove('open');
+  };
+
+  hamburger.addEventListener('click', function(e) {
+    e.stopPropagation();
+    hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+  });
+
+  // Close when tapping anywhere outside the nav
+  document.addEventListener('click', function(e) {
+    if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
+      window.closeMobileNav();
+    }
+  });
+</script>
+</body>
+</html>
